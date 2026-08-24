@@ -27,10 +27,23 @@ const server = http.createServer((req, res) => {
                     res.end(JSON.stringify({ error: 'O campo "titulo" é obrigatório.' }));
                     return;
                 }
-            } catch (error) {
 
+                const tarefaCriada = {
+                    id: tarefas.length + 1,
+                    titulo: novaTarefa.titulo
+                };
+                tarefas.push(tarefaCriada);
+                res.statusCode = 201;
+                res.end(JSON.stringify(tarefaCriada));
+
+            } catch (error) {
+                res.statusCode = 400;
+                res.end(JSON.stringify({ error: 'Dados inválidos.' }));
             }
         });
+    } else {
+        res.statusCode = 404;
+        res.end(JSON.stringify({ error: 'Rota não encontrada.' }));
     }
 });
 
