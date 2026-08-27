@@ -17,7 +17,12 @@ const server = http.createServer((req, res) => {
     if (req.method === 'GET' && req.url === '/tarefas') {
         res.statusCode = 200;
         res.end(JSON.stringify(tarefas));
-    } else if (req.method === 'POST' && req.url === '/tarefa') {
+    
+    
+    } else if (req.method === 'GET' && urlobj.pathname == '/tarefa/busca') {
+    const tituloBusca = urlobj.searchParams.get('titulo');   
+    }
+     else if (req.method === 'POST' && req.url === '/tarefa') {
         let body = '';
         
         req.on('data', (chunk) => {
