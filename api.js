@@ -1,4 +1,5 @@
 import http from 'node:http';
+import { URL } from 'node:url';
 
 const porta = 3000;
 const tarefas = [
@@ -9,6 +10,10 @@ const tarefas = [
 const server = http.createServer((req, res) => {
     res.setHeader('content-type', 'application/json; charset=utf-8');
 
+    
+    const urlobj = new URL(req.url, `http://${req.headers.host}`);
+
+    
     if (req.method === 'GET' && req.url === '/tarefas') {
         res.statusCode = 200;
         res.end(JSON.stringify(tarefas));
@@ -35,6 +40,7 @@ const server = http.createServer((req, res) => {
                 tarefas.push(tarefaCriada);
                 res.statusCode = 201;
                 res.end(JSON.stringify(tarefaCriada));
+                
 
             } catch (error) {
                 res.statusCode = 400;
