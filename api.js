@@ -4,7 +4,9 @@ import { URL } from 'node:url';
 const porta = 3000;
 const tarefas = [
     { id: 1, titulo: 'Resenhar' },
-    { id: 2, titulo: 'Farmar Aura' }
+    { id: 2, titulo: 'Farmar Aura' },
+    { id: 3, titulo: 'Farmar Essência' },,
+    { id: 4, titulo: 'farmar diamante'},
 ];
 
 const server = http.createServer((req, res) => {
@@ -15,7 +17,7 @@ const server = http.createServer((req, res) => {
     if (req.method === 'GET' && urlobj.pathname === '/tarefas' && !urlobj.searchParams.has('titulo')) {
         res.statusCode = 200;
         res.end(JSON.stringify(tarefas));
-    
+    1
     } else if (req.method === 'GET' && urlobj.pathname === '/tarefas/busca') {
         const tituloBusca = urlobj.searchParams.get('titulo') || '';
         const filtradas = tarefas.filter(t => t.titulo.toLowerCase().includes(tituloBusca.toLowerCase()));
